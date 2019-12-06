@@ -1,7 +1,9 @@
 all:
   vars:
     app_server_address: "${appserver_guest_ip}" # an address that is assigned to the juice shop and grafana virtual server pool members. If the add_ubuntu_interface variable is set to true, this address will also be assigned to the eth1 interface of the Ubuntu server
-
+    app_ex_pool_server_address : "10.1.20.12"
+    app_hsl_server_address : "10.1.20.13"
+    
   children:
     servers:
       hosts:
@@ -11,7 +13,7 @@ all:
           ansible_become: true # determines if privilege escalation is used while issuing Ansible tasks on the Ubuntu server
           ansible_ssh_private_key_file: "~/${ec2_key_name}.pem" # path to private key file to use for ssh authentication
           add_ubuntu_interface: false # boolean to add an optional network interface (eth1) to the Ubuntu server using the NetPlan role
-          app_server_gateway: "${appserver_gateway_ip}" 
+          app_server_gateway: "${appserver_gateway_ip}"
 
     big_ips:
       hosts:
